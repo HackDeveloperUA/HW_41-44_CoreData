@@ -10,11 +10,11 @@
 		6C97BDA21B736668001E3E62 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C97BDA11B736668001E3E62 /* main.m */; };
 		6C97BDA51B736668001E3E62 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C97BDA41B736668001E3E62 /* AppDelegate.m */; };
 		6C97BDA81B736668001E3E62 /* HW_41_44_CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6C97BDA61B736668001E3E62 /* HW_41_44_CoreData.xcdatamodeld */; };
-		6C97BDAB1B736668001E3E62 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C97BDAA1B736668001E3E62 /* ViewController.m */; };
 		6C97BDAE1B736668001E3E62 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C97BDAC1B736668001E3E62 /* Main.storyboard */; };
 		6C97BDB01B736668001E3E62 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C97BDAF1B736668001E3E62 /* Images.xcassets */; };
 		6C97BDB31B736668001E3E62 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C97BDB11B736668001E3E62 /* LaunchScreen.xib */; };
 		6C97BDBF1B736668001E3E62 /* HW_41_44_CoreDataTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C97BDBE1B736668001E3E62 /* HW_41_44_CoreDataTests.m */; };
+		6C97BDCA1B7366F9001E3E62 /* ASStudentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C97BDC91B7366F9001E3E62 /* ASStudentsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,14 +34,14 @@
 		6C97BDA31B736668001E3E62 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6C97BDA41B736668001E3E62 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		6C97BDA71B736668001E3E62 /* HW_41_44_CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HW_41_44_CoreData.xcdatamodel; sourceTree = "<group>"; };
-		6C97BDA91B736668001E3E62 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		6C97BDAA1B736668001E3E62 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		6C97BDAD1B736668001E3E62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6C97BDAF1B736668001E3E62 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6C97BDB21B736668001E3E62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		6C97BDB81B736668001E3E62 /* HW_41-44_CoreDataTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "HW_41-44_CoreDataTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C97BDBD1B736668001E3E62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6C97BDBE1B736668001E3E62 /* HW_41_44_CoreDataTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HW_41_44_CoreDataTests.m; sourceTree = "<group>"; };
+		6C97BDC81B7366F9001E3E62 /* ASStudentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASStudentsViewController.h; sourceTree = "<group>"; };
+		6C97BDC91B7366F9001E3E62 /* ASStudentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASStudentsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,13 +83,10 @@
 		6C97BD9E1B736668001E3E62 /* HW_41-44_CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				6C97BDA31B736668001E3E62 /* AppDelegate.h */,
-				6C97BDA41B736668001E3E62 /* AppDelegate.m */,
-				6C97BDA91B736668001E3E62 /* ViewController.h */,
-				6C97BDAA1B736668001E3E62 /* ViewController.m */,
 				6C97BDAC1B736668001E3E62 /* Main.storyboard */,
+				6C97BDC81B7366F9001E3E62 /* ASStudentsViewController.h */,
+				6C97BDC91B7366F9001E3E62 /* ASStudentsViewController.m */,
 				6C97BDAF1B736668001E3E62 /* Images.xcassets */,
-				6C97BDB11B736668001E3E62 /* LaunchScreen.xib */,
 				6C97BDA61B736668001E3E62 /* HW_41_44_CoreData.xcdatamodeld */,
 				6C97BD9F1B736668001E3E62 /* Supporting Files */,
 			);
@@ -99,6 +96,9 @@
 		6C97BD9F1B736668001E3E62 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6C97BDA31B736668001E3E62 /* AppDelegate.h */,
+				6C97BDA41B736668001E3E62 /* AppDelegate.m */,
+				6C97BDB11B736668001E3E62 /* LaunchScreen.xib */,
 				6C97BDA01B736668001E3E62 /* Info.plist */,
 				6C97BDA11B736668001E3E62 /* main.m */,
 			);
@@ -224,7 +224,7 @@
 			files = (
 				6C97BDA51B736668001E3E62 /* AppDelegate.m in Sources */,
 				6C97BDA81B736668001E3E62 /* HW_41_44_CoreData.xcdatamodeld in Sources */,
-				6C97BDAB1B736668001E3E62 /* ViewController.m in Sources */,
+				6C97BDCA1B7366F9001E3E62 /* ASStudentsViewController.m in Sources */,
 				6C97BDA21B736668001E3E62 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

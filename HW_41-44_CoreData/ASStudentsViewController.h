@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  ASStudentsViewController.h
 //  HW_41-44_CoreData
 //
 //  Created by MD on 06.08.15.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface ASStudentsViewController : UITableViewController
 
 @end
-
