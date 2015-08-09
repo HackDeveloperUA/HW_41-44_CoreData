@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6C2DDA431B76AE1B00AD2F8D /* ASTeacher.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C2DDA421B76AE1B00AD2F8D /* ASTeacher.m */; };
+		6C2DDA461B76AE1C00AD2F8D /* ASCourse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C2DDA451B76AE1C00AD2F8D /* ASCourse.m */; };
+		6C2DDA491B76AF2600AD2F8D /* TabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C2DDA481B76AF2600AD2F8D /* TabViewController.m */; };
 		6C97BDA21B736668001E3E62 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C97BDA11B736668001E3E62 /* main.m */; };
 		6C97BDA51B736668001E3E62 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C97BDA41B736668001E3E62 /* AppDelegate.m */; };
 		6C97BDA81B736668001E3E62 /* HW_41_44_CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6C97BDA61B736668001E3E62 /* HW_41_44_CoreData.xcdatamodeld */; };
@@ -33,6 +36,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6C2DDA411B76AE1B00AD2F8D /* ASTeacher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASTeacher.h; sourceTree = "<group>"; };
+		6C2DDA421B76AE1B00AD2F8D /* ASTeacher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASTeacher.m; sourceTree = "<group>"; };
+		6C2DDA441B76AE1C00AD2F8D /* ASCourse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASCourse.h; sourceTree = "<group>"; };
+		6C2DDA451B76AE1C00AD2F8D /* ASCourse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASCourse.m; sourceTree = "<group>"; };
+		6C2DDA471B76AF2600AD2F8D /* TabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabViewController.h; sourceTree = "<group>"; };
+		6C2DDA481B76AF2600AD2F8D /* TabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabViewController.m; sourceTree = "<group>"; };
 		6C97BD9C1B736668001E3E62 /* HW_41-44_CoreData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HW_41-44_CoreData.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C97BDA01B736668001E3E62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6C97BDA11B736668001E3E62 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -77,6 +86,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6C2DDA2F1B7697FC00AD2F8D /* ASStudents */ = {
+			isa = PBXGroup;
+			children = (
+				6CA2B8CD1B74C32D00FF93AB /* ASStudents.h */,
+				6CA2B8CE1B74C32D00FF93AB /* ASStudents.m */,
+			);
+			name = ASStudents;
+			sourceTree = "<group>";
+		};
+		6C2DDA301B76980B00AD2F8D /* ASTeacher */ = {
+			isa = PBXGroup;
+			children = (
+				6C2DDA411B76AE1B00AD2F8D /* ASTeacher.h */,
+				6C2DDA421B76AE1B00AD2F8D /* ASTeacher.m */,
+			);
+			name = ASTeacher;
+			sourceTree = "<group>";
+		};
+		6C2DDA311B76981500AD2F8D /* ASCourse */ = {
+			isa = PBXGroup;
+			children = (
+				6C2DDA441B76AE1C00AD2F8D /* ASCourse.h */,
+				6C2DDA451B76AE1C00AD2F8D /* ASCourse.m */,
+			);
+			name = ASCourse;
+			sourceTree = "<group>";
+		};
 		6C97BD931B736668001E3E62 = {
 			isa = PBXGroup;
 			children = (
@@ -99,18 +135,19 @@
 		6C97BD9E1B736668001E3E62 /* HW_41-44_CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				6C2DDA471B76AF2600AD2F8D /* TabViewController.h */,
+				6C2DDA481B76AF2600AD2F8D /* TabViewController.m */,
 				6CA2B8CC1B74C2E700FF93AB /* Models */,
 				6C97BDAC1B736668001E3E62 /* Main.storyboard */,
-				6CA2B8C91B74C2A100FF93AB /* ASStudentsViewController.h */,
-				6CA2B8CA1B74C2A100FF93AB /* ASStudentsViewController.m */,
-				6C97BDCB1B736B0A001E3E62 /* ASEditStudentsViewController.h */,
-				6C97BDCC1B736B0A001E3E62 /* ASEditStudentsViewController.m */,
-				6C97BDCE1B73783A001E3E62 /* ASCoreDataViewController.h */,
-				6C97BDCF1B73783A001E3E62 /* ASCoreDataViewController.m */,
-				6C97BDD11B7378C6001E3E62 /* ASDataManager.h */,
-				6C97BDD21B7378C6001E3E62 /* ASDataManager.m */,
+				6CA2B8D01B750E5300FF93AB /* Students ViewController */,
+				6CA2B8D11B750E6100FF93AB /* Edit Students ViewController */,
+				6CA2B8D21B750E6B00FF93AB /* CoreData ViewController */,
 				6C97BDAF1B736668001E3E62 /* Images.xcassets */,
 				6C97BDA61B736668001E3E62 /* HW_41_44_CoreData.xcdatamodeld */,
+				6C97BDD11B7378C6001E3E62 /* ASDataManager.h */,
+				6C97BDD21B7378C6001E3E62 /* ASDataManager.m */,
+				6C97BDA31B736668001E3E62 /* AppDelegate.h */,
+				6C97BDA41B736668001E3E62 /* AppDelegate.m */,
 				6C97BD9F1B736668001E3E62 /* Supporting Files */,
 			);
 			path = "HW_41-44_CoreData";
@@ -119,8 +156,6 @@
 		6C97BD9F1B736668001E3E62 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				6C97BDA31B736668001E3E62 /* AppDelegate.h */,
-				6C97BDA41B736668001E3E62 /* AppDelegate.m */,
 				6C97BDB11B736668001E3E62 /* LaunchScreen.xib */,
 				6C97BDA01B736668001E3E62 /* Info.plist */,
 				6C97BDA11B736668001E3E62 /* main.m */,
@@ -148,10 +183,38 @@
 		6CA2B8CC1B74C2E700FF93AB /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				6CA2B8CD1B74C32D00FF93AB /* ASStudents.h */,
-				6CA2B8CE1B74C32D00FF93AB /* ASStudents.m */,
+				6C2DDA311B76981500AD2F8D /* ASCourse */,
+				6C2DDA301B76980B00AD2F8D /* ASTeacher */,
+				6C2DDA2F1B7697FC00AD2F8D /* ASStudents */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		6CA2B8D01B750E5300FF93AB /* Students ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6CA2B8C91B74C2A100FF93AB /* ASStudentsViewController.h */,
+				6CA2B8CA1B74C2A100FF93AB /* ASStudentsViewController.m */,
+			);
+			name = "Students ViewController";
+			sourceTree = "<group>";
+		};
+		6CA2B8D11B750E6100FF93AB /* Edit Students ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6C97BDCB1B736B0A001E3E62 /* ASEditStudentsViewController.h */,
+				6C97BDCC1B736B0A001E3E62 /* ASEditStudentsViewController.m */,
+			);
+			name = "Edit Students ViewController";
+			sourceTree = "<group>";
+		};
+		6CA2B8D21B750E6B00FF93AB /* CoreData ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6C97BDCE1B73783A001E3E62 /* ASCoreDataViewController.h */,
+				6C97BDCF1B73783A001E3E62 /* ASCoreDataViewController.m */,
+			);
+			name = "CoreData ViewController";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -254,14 +317,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C2DDA491B76AF2600AD2F8D /* TabViewController.m in Sources */,
 				6C97BDA51B736668001E3E62 /* AppDelegate.m in Sources */,
 				6CA2B8CB1B74C2A100FF93AB /* ASStudentsViewController.m in Sources */,
 				6C97BDD31B7378C6001E3E62 /* ASDataManager.m in Sources */,
 				6C97BDCD1B736B0A001E3E62 /* ASEditStudentsViewController.m in Sources */,
+				6C2DDA461B76AE1C00AD2F8D /* ASCourse.m in Sources */,
 				6C97BDA81B736668001E3E62 /* HW_41_44_CoreData.xcdatamodeld in Sources */,
 				6CA2B8CF1B74C32D00FF93AB /* ASStudents.m in Sources */,
 				6C97BDA21B736668001E3E62 /* main.m in Sources */,
 				6C97BDD01B73783A001E3E62 /* ASCoreDataViewController.m in Sources */,
+				6C2DDA431B76AE1B00AD2F8D /* ASTeacher.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

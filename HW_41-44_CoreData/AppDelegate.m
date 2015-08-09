@@ -7,8 +7,18 @@
 //
 
 #import "AppDelegate.h"
+#import "TabViewController.h"
+#import "ASStudentsViewController.h"
 
 @interface AppDelegate ()
+
+@property (nonatomic, strong) TabViewController* tabController;
+
+@property (nonatomic, strong) ASStudentsViewController* vc1;
+@property (nonatomic, strong) ASStudentsViewController* vc2;
+
+//@property (nonatomic, strong) ViewController* vc2;
+//@property (nonatomic, strong) ViewController* vc3;
 
 @end
 
@@ -17,6 +27,42 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+
+    /*
+    ASStudentsViewController *view1 = [[ASStudentsViewController alloc] init];
+    ASStudentsViewController *view2 = [[ASStudentsViewController alloc] init];
+
+    UINavigationController *navVC1 = [[UINavigationController alloc] initWithRootViewController:view1];
+    
+     self.vc1 = view1;
+     self.vc2 = view2;
+
+    NSArray *tabItems = @[navVC1];
+
+    
+    self.vc1.tabBarItem =
+    [[UITabBarItem alloc] initWithTitle:@"view1"
+                                  image:[UIImage imageNamed:@"view1"]
+                                    tag:1];
+    self.vc2.tabBarItem =
+    [[UITabBarItem alloc] initWithTitle:@"view2"
+                                  image:[UIImage imageNamed:@"view2"]
+                                    tag:1];
+    
+    TabViewController *tbc = [[TabViewController alloc] init];
+    [tbc setViewControllers:tabItems];
+
+    self.tabController = tbc;
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.rootViewController =   self.tabController;
+    
+    [self.window makeKeyAndVisible];
+
+    */
+    
+    
+    
+    
     return YES;
 }
 

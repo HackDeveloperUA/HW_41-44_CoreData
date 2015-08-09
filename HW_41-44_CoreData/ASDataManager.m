@@ -169,7 +169,7 @@ static NSString* carModelNames[] = {
     [self printArray:allObjects];
 }
 */
-- (void) deleteAllObjects {
+-(void) deleteAllObjects {
     
     NSArray* allObjects = [self allObjects];
     

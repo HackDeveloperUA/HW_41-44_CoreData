@@ -1,13 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14E46" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="ASCourse" representedClassName="ASCourse" parentEntity="ASObject" syncable="YES">
+        <attribute name="branch" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="subject" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="students" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ASStudents" inverseName="courses" inverseEntity="ASStudents" syncable="YES"/>
+        <relationship name="teachers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ASTeacher" inverseName="courses" inverseEntity="ASTeacher" syncable="YES"/>
+    </entity>
     <entity name="ASObject" isAbstract="YES" syncable="YES"/>
     <entity name="ASStudents" representedClassName="ASStudents" parentEntity="ASObject" syncable="YES">
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="courses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ASCourse" inverseName="students" inverseEntity="ASCourse" syncable="YES"/>
+    </entity>
+    <entity name="ASTeacher" representedClassName="ASTeacher" parentEntity="ASObject" syncable="YES">
+        <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="courses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ASCourse" inverseName="teachers" inverseEntity="ASCourse" syncable="YES"/>
     </entity>
     <elements>
-        <element name="ASObject" positionX="-1946" positionY="-7623" width="128" height="43"/>
-        <element name="ASStudents" positionX="-1946" positionY="-7488" width="128" height="88"/>
+        <element name="ASObject" positionX="-2160" positionY="-7603" width="128" height="43"/>
+        <element name="ASStudents" positionX="-1883" positionY="-7425" width="128" height="103"/>
+        <element name="ASCourse" positionX="-2162" positionY="-7434" width="128" height="118"/>
+        <element name="ASTeacher" positionX="-2421" positionY="-7425" width="128" height="88"/>
     </elements>
 </model>

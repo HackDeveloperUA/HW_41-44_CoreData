@@ -25,12 +25,13 @@
     self.navigationItem.rightBarButtonItem = doneButton;
     
     
-    
-    
-    if (![self.student isEqual:nil]) {
+    if (self.student  != nil) {
         self.firstNameField.text = _student.firstName;
         self.lastNameField.text  = _student.lastName;
         self.emailField.text     = _student.email;
+        self.navigationItem.title = @"Edit Student";
+    } else {
+        self.navigationItem.title = @"Create Student";
     }
 }
 
@@ -53,21 +54,31 @@
 -(void) doneButtonAction:(id)sender {
     
     
-    NSEntityDescription* student = [NSEntityDescription insertNewObjectForEntityForName:@"ASStudents"
-                                                                 inManagedObjectContext:self.managedObjectContext];
+    if (self.student == nil) {
     
-    
-    
-    [student setValue:self.firstNameField.text forKey:@"firstName"];
-    [student setValue:self.lastNameField.text  forKey:@"lastName"];
+        // Сохрание нового студента
+        NSEntityDescription* student = [NSEntityDescription insertNewObjectForEntityForName:@"ASStudents"
+                                                                     inManagedObjectContext:self.managedObjectContext];
+        [student setValue:self.firstNameField.text forKey:@"firstName"];
+        [student setValue:self.lastNameField.text  forKey:@"lastName"];
+        [student setValue:self.emailField.text     forKey:@"email"];
 
-    [student setValue:self.emailField.text     forKey:@"email"];
-    
+        
+    } else {
+        // Редактирование старого студента
+        [self.student setValue:self.firstNameField.text  forKey:@"firstName"];
+        [self.student setValue:self.lastNameField.text  forKey:@"lastName"];
+        [self.student setValue:self.emailField.text      forKey:@"email"];
+   
+      
+    }
+
     NSError* error = nil;
     if (![self.managedObjectContext save:&error]) {
         NSLog(@"%@",[error localizedDescription]);
     }
-
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 

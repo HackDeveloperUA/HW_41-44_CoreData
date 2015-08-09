@@ -8,6 +8,9 @@
 
 #import "ASStudentsViewController.h"
 #import "ASEditStudentsViewController.h"
+
+#import "ASStudents.h"
+
 @interface ASStudentsViewController ()
 
 @end
@@ -18,12 +21,88 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+   
+    UIBarButtonItem *deleteButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash
+                                                                                target:self
+                                                                                action:@selector(deleteButtonAction:)];
+    
+    
+    NSMutableArray* tmpRigthButton = @[self.navigationItem.rightBarButtonItem,deleteButton];
+   // NSMutableArray* tmpRigthButton = @[deleteButton];
+
+    self.navigationItem.rightBarButtonItems = tmpRigthButton;
+    
+    [self printAllObjects];
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+#pragma mark - actions
+
+-(void) deleteButtonAction:(id) sender {
+
+    [self deleteAllObjects];
+}
+
+
+-(void) deleteAllObjects {
+    
+    NSArray* allObjects = [self allObjects];
+    
+    for (id object in allObjects) {
+        [self.managedObjectContext deleteObject:object];
+    }
+    [self.managedObjectContext save:nil];
+}
+
+
+
+- (NSArray*) allObjects {
+    
+    NSFetchRequest* request = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription* description =
+    [NSEntityDescription entityForName:@"ASObject"
+                inManagedObjectContext:self.managedObjectContext];
+    
+    [request setEntity:description];
+    
+    NSError* requestError = nil;
+    NSArray* resultArray = [self.managedObjectContext executeFetchRequest:request error:&requestError];
+    if (requestError) {
+        NSLog(@"%@", [requestError localizedDescription]);
+    }
+    
+    return resultArray;
+}
+
+- (void) printArray:(NSArray*) array {
+    
+    for (id object in array) {
+        
+        if ([object isKindOfClass:[ASStudents class]]) {
+            
+            ASStudents* student = (ASStudents*) object;
+            NSLog(@"First Name : %@ | Last Name : %@ | Email : %@",
+                  student.firstName,student.lastName,student.email);
+        }
+    }
+    
+    NSLog(@"COUNT = %d", [array count]);
+}
+
+- (void) printAllObjects {
+    
+    NSArray* allObjects = [self allObjects];
+    
+    [self printArray:allObjects];
+}
+
 
 
 - (NSFetchedResultsController *)fetchedResultsController
@@ -76,7 +155,6 @@
     
     cell.textLabel.text = [NSString stringWithFormat:@"%@ %@",student.firstName,student.lastName];
     cell.detailTextLabel.text = student.email;
-    
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 }
 

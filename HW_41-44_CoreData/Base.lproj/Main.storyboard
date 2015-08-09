@@ -46,7 +46,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="9vx-8M-ds8">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
                             <tableViewSection headerTitle="Initials" id="I1d-Ik-4yY">
                                 <cells>
@@ -61,7 +61,7 @@
                                                         <constraint firstAttribute="width" constant="87" id="Dg5-wF-cmE"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="enter your name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jEO-Da-m7n">
@@ -91,7 +91,7 @@
                                                         <constraint firstAttribute="width" constant="87" id="cwQ-Xs-i3R"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="enter your last name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NNx-af-MH5">
@@ -125,7 +125,7 @@
                                                         <constraint firstAttribute="width" constant="87" id="CNb-7O-etu"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T15-IK-9tx">
@@ -181,11 +181,11 @@
             </objects>
             <point key="canvasLocation" x="707" y="454"/>
         </scene>
-        <!--Item-->
+        <!--Navigation Controller-->
         <scene sceneID="byA-f1-l2j">
             <objects>
                 <navigationController id="hlK-6E-eSf" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="33L-l3-vHB"/>
+                    <tabBarItem key="tabBarItem" systemItem="contacts" id="33L-l3-vHB"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="pAT-IW-Sbk">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

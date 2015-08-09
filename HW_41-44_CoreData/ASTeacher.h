@@ -1,8 +1,8 @@
 //
-//  ASStudents.h
+//  ASTeacher.h
 //  HW_41-44_CoreData
 //
-//  Created by MD on 08.08.15.
+//  Created by MD on 09.08.15.
 //  Copyright (c) 2015 MD. All rights reserved.
 //
 
@@ -10,20 +10,19 @@
 #import <CoreData/CoreData.h>
 //#import "NSManagedObject.h"
 
-@class NSManagedObject;
+@class ASCourse;
 
-@interface ASStudents : NSManagedObject
+@interface ASTeacher : NSManagedObject
 
-@property (nonatomic, retain) NSString * email;
 @property (nonatomic, retain) NSString * firstName;
 @property (nonatomic, retain) NSString * lastName;
 @property (nonatomic, retain) NSSet *courses;
 @end
 
-@interface ASStudents (CoreDataGeneratedAccessors)
+@interface ASTeacher (CoreDataGeneratedAccessors)
 
-- (void)addCoursesObject:(NSManagedObject *)value;
-- (void)removeCoursesObject:(NSManagedObject *)value;
+- (void)addCoursesObject:(ASCourse *)value;
+- (void)removeCoursesObject:(ASCourse *)value;
 - (void)addCourses:(NSSet *)values;
 - (void)removeCourses:(NSSet *)values;
 
