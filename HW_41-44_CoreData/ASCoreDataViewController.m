@@ -19,6 +19,17 @@
 {
     self = [super initWithStyle:UITableViewStylePlain];
     if (self) {
+      
+        self.deleteEntityButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash
+                                                                                      target:self
+                                                                                      action:@selector(deleteEntityAction:)];
+        
+        self.addEntityButton   = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                                                               target:self
+                                                                               action:@selector(addEntityAction:)];
+
+        self.navigationItem.rightBarButtonItems = @[self.addEntityButton,self.deleteEntityButton];
+        
         
     }
     return self;
@@ -30,6 +41,24 @@
         _managedObjectContext = [[ASDataManager sharedManager] managedObjectContext];
     }
     return _managedObjectContext;
+}
+
+
+#pragma mark - Action
+
+
+
+-(void) deleteEntityAction:(id) sender {
+    
+    NSLog(@"deleteButtonAction - Core Data View Controller");
+  //  [self deleteAllObjects];
+}
+
+
+-(void) addEntityAction:(id) sender {
+    
+    NSLog(@"addEntityAction - Core Data View Controller");
+    //  [self deleteAllObjects];
 }
 
 

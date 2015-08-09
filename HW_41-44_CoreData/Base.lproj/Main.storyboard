@@ -28,11 +28,7 @@
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Student" id="3Pa-Ei-uNo"/>
                     <navigationItem key="navigationItem" title="ASStudent" id="QOC-8n-N1o">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="cMy-eh-jkU">
-                            <connections>
-                                <action selector="addStudentAction:" destination="x7Q-Dy-L4K" id="kDK-Ed-FU2"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="cMy-eh-jkU"/>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bDp-sW-rZJ" userLabel="First Responder" sceneMemberID="firstResponder"/>

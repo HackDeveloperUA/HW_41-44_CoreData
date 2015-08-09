@@ -21,6 +21,6 @@
 
 + (ASDataManager*) sharedManager;
 
-
+-(void) deleteAllObjects: (NSString*) nameEntity;
 - (void) generateAndAddUniversity;
 @end

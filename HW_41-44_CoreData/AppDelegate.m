@@ -9,14 +9,13 @@
 #import "AppDelegate.h"
 #import "TabViewController.h"
 #import "ASStudentsViewController.h"
-
+#import "ASCourseViewController.h"
 @interface AppDelegate ()
 
 @property (nonatomic, strong) TabViewController* tabController;
 
 @property (nonatomic, strong) ASStudentsViewController* vc1;
-@property (nonatomic, strong) ASStudentsViewController* vc2;
-
+@property (nonatomic, strong) ASCourseViewController* vc2;
 //@property (nonatomic, strong) ViewController* vc2;
 //@property (nonatomic, strong) ViewController* vc3;
 
@@ -28,26 +27,29 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
 
-    /*
-    ASStudentsViewController *view1 = [[ASStudentsViewController alloc] init];
-    ASStudentsViewController *view2 = [[ASStudentsViewController alloc] init];
+    
+    ASStudentsViewController *view1  = [[ASStudentsViewController alloc] init];
+    ASCourseViewController   *view2  = [[ASCourseViewController alloc] init];
 
     UINavigationController *navVC1 = [[UINavigationController alloc] initWithRootViewController:view1];
-    
-     self.vc1 = view1;
-     self.vc2 = view2;
+    UINavigationController *navVC2 = [[UINavigationController alloc] initWithRootViewController:view2];
 
-    NSArray *tabItems = @[navVC1];
+    self.vc1 = view1;
+    self.vc2 = view2;
+
+    NSArray *tabItems = @[navVC1,navVC2];
 
     
-    self.vc1.tabBarItem =
-    [[UITabBarItem alloc] initWithTitle:@"view1"
-                                  image:[UIImage imageNamed:@"view1"]
+    navVC1.tabBarItem =
+    [[UITabBarItem alloc] initWithTitle:@"Students"
+                                  image:[UIImage imageNamed:@"Graduate-128"]
                                     tag:1];
-    self.vc2.tabBarItem =
-    [[UITabBarItem alloc] initWithTitle:@"view2"
-                                  image:[UIImage imageNamed:@"view2"]
+
+    navVC2.tabBarItem =
+    [[UITabBarItem alloc] initWithTitle:@"Courses"
+                                  image:[UIImage imageNamed:@"aami3-35-128"]
                                     tag:1];
+
     
     TabViewController *tbc = [[TabViewController alloc] init];
     [tbc setViewControllers:tabItems];
@@ -58,7 +60,7 @@
     
     [self.window makeKeyAndVisible];
 
-    */
+   
     
     
     

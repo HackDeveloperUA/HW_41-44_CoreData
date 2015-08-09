@@ -107,6 +107,8 @@ static NSString* carModelNames[] = {
     return course;
 }*/
 
+/*
+// Old version
 
 - (NSArray*) allObjects {
     
@@ -125,7 +127,7 @@ static NSString* carModelNames[] = {
     }
     
     return resultArray;
-}
+}*/
 
 /*
 - (void) printArray:(NSArray*) array {
@@ -169,9 +171,31 @@ static NSString* carModelNames[] = {
     [self printArray:allObjects];
 }
 */
--(void) deleteAllObjects {
+
+- (NSArray*) allObjects: (NSString*) nameEntity {
     
-    NSArray* allObjects = [self allObjects];
+    NSFetchRequest* request = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription* description =
+    [NSEntityDescription entityForName:nameEntity
+                inManagedObjectContext:self.managedObjectContext];
+    
+    [request setEntity:description];
+    
+    NSError* requestError = nil;
+    NSArray* resultArray = [self.managedObjectContext executeFetchRequest:request error:&requestError];
+    if (requestError) {
+        NSLog(@"%@", [requestError localizedDescription]);
+    }
+    
+    return resultArray;
+}
+
+
+
+-(void) deleteAllObjects: (NSString*) nameEntity{
+    
+    NSArray* allObjects = [self allObjects:nameEntity];
     
     for (id object in allObjects) {
         [self.managedObjectContext deleteObject:object];
