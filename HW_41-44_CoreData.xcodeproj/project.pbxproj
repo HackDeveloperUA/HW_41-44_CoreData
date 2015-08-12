@@ -11,7 +11,7 @@
 		6C2DDA461B76AE1C00AD2F8D /* ASCourse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C2DDA451B76AE1C00AD2F8D /* ASCourse.m */; };
 		6C2DDA491B76AF2600AD2F8D /* TabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C2DDA481B76AF2600AD2F8D /* TabViewController.m */; };
 		6C57A41D1B77BD4200EBC5E5 /* ASCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C57A41C1B77BD4200EBC5E5 /* ASCourseViewController.m */; };
-		6C57A41F1B77E60C00EBC5E5 /* newStl.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C57A41E1B77E60C00EBC5E5 /* newStl.png */; };
+		6C57A43B1B77EF7600EBC5E5 /* ASTeacherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C57A43A1B77EF7600EBC5E5 /* ASTeacherViewController.m */; };
 		6C97BDA21B736668001E3E62 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C97BDA11B736668001E3E62 /* main.m */; };
 		6C97BDA51B736668001E3E62 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C97BDA41B736668001E3E62 /* AppDelegate.m */; };
 		6C97BDA81B736668001E3E62 /* HW_41_44_CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6C97BDA61B736668001E3E62 /* HW_41_44_CoreData.xcdatamodeld */; };
@@ -25,6 +25,9 @@
 		6C97BDD51B737A87001E3E62 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C97BDD41B737A87001E3E62 /* CoreData.framework */; };
 		6CA2B8CB1B74C2A100FF93AB /* ASStudentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA2B8CA1B74C2A100FF93AB /* ASStudentsViewController.m */; };
 		6CA2B8CF1B74C32D00FF93AB /* ASStudents.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA2B8CE1B74C32D00FF93AB /* ASStudents.m */; };
+		6CCBD1511B78AC4B000BB391 /* ASDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCBD1501B78AC4B000BB391 /* ASDetailViewController.m */; };
+		6CCBD1541B78AE3B000BB391 /* ASDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCBD1531B78AE3B000BB391 /* ASDetailTableViewCell.m */; };
+		6CCBD1571B78FF1B000BB391 /* UIView+SuperTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCBD1561B78FF1B000BB391 /* UIView+SuperTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,7 +49,8 @@
 		6C2DDA481B76AF2600AD2F8D /* TabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabViewController.m; sourceTree = "<group>"; };
 		6C57A41B1B77BD4200EBC5E5 /* ASCourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASCourseViewController.h; sourceTree = "<group>"; };
 		6C57A41C1B77BD4200EBC5E5 /* ASCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASCourseViewController.m; sourceTree = "<group>"; };
-		6C57A41E1B77E60C00EBC5E5 /* newStl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = newStl.png; path = ../../../../Desktop/newStl.png; sourceTree = "<group>"; };
+		6C57A4391B77EF7600EBC5E5 /* ASTeacherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASTeacherViewController.h; sourceTree = "<group>"; };
+		6C57A43A1B77EF7600EBC5E5 /* ASTeacherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASTeacherViewController.m; sourceTree = "<group>"; };
 		6C97BD9C1B736668001E3E62 /* HW_41-44_CoreData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HW_41-44_CoreData.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C97BDA01B736668001E3E62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6C97BDA11B736668001E3E62 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -70,6 +74,12 @@
 		6CA2B8CA1B74C2A100FF93AB /* ASStudentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASStudentsViewController.m; sourceTree = "<group>"; };
 		6CA2B8CD1B74C32D00FF93AB /* ASStudents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASStudents.h; sourceTree = "<group>"; };
 		6CA2B8CE1B74C32D00FF93AB /* ASStudents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASStudents.m; sourceTree = "<group>"; };
+		6CCBD14F1B78AC4B000BB391 /* ASDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDetailViewController.h; sourceTree = "<group>"; };
+		6CCBD1501B78AC4B000BB391 /* ASDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDetailViewController.m; sourceTree = "<group>"; };
+		6CCBD1521B78AE3B000BB391 /* ASDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASDetailTableViewCell.h; sourceTree = "<group>"; };
+		6CCBD1531B78AE3B000BB391 /* ASDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASDetailTableViewCell.m; sourceTree = "<group>"; };
+		6CCBD1551B78FF1B000BB391 /* UIView+SuperTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SuperTableViewCell.h"; sourceTree = "<group>"; };
+		6CCBD1561B78FF1B000BB391 /* UIView+SuperTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SuperTableViewCell.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +137,26 @@
 			name = "Course ViewController";
 			sourceTree = "<group>";
 		};
+		6C57A4381B77EF5000EBC5E5 /* Teacher ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6C57A4391B77EF7600EBC5E5 /* ASTeacherViewController.h */,
+				6C57A43A1B77EF7600EBC5E5 /* ASTeacherViewController.m */,
+			);
+			name = "Teacher ViewController";
+			sourceTree = "<group>";
+		};
+		6C57A43C1B77F15500EBC5E5 /* Detail ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6CCBD14F1B78AC4B000BB391 /* ASDetailViewController.h */,
+				6CCBD1501B78AC4B000BB391 /* ASDetailViewController.m */,
+				6CCBD1521B78AE3B000BB391 /* ASDetailTableViewCell.h */,
+				6CCBD1531B78AE3B000BB391 /* ASDetailTableViewCell.m */,
+			);
+			name = "Detail ViewController";
+			sourceTree = "<group>";
+		};
 		6C97BD931B736668001E3E62 = {
 			isa = PBXGroup;
 			children = (
@@ -134,6 +164,8 @@
 				6C97BD9E1B736668001E3E62 /* HW_41-44_CoreData */,
 				6C97BDBB1B736668001E3E62 /* HW_41-44_CoreDataTests */,
 				6C97BD9D1B736668001E3E62 /* Products */,
+				6CCBD1551B78FF1B000BB391 /* UIView+SuperTableViewCell.h */,
+				6CCBD1561B78FF1B000BB391 /* UIView+SuperTableViewCell.m */,
 			);
 			sourceTree = "<group>";
 		};
@@ -149,21 +181,20 @@
 		6C97BD9E1B736668001E3E62 /* HW_41-44_CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				6C2DDA471B76AF2600AD2F8D /* TabViewController.h */,
-				6C2DDA481B76AF2600AD2F8D /* TabViewController.m */,
 				6CA2B8CC1B74C2E700FF93AB /* Models */,
-				6C97BDAC1B736668001E3E62 /* Main.storyboard */,
-				6C57A41A1B77BD1500EBC5E5 /* Course ViewController */,
-				6CA2B8D01B750E5300FF93AB /* Students ViewController */,
-				6CA2B8D11B750E6100FF93AB /* Edit Students ViewController */,
 				6CA2B8D21B750E6B00FF93AB /* CoreData ViewController */,
-				6C97BDAF1B736668001E3E62 /* Images.xcassets */,
-				6C57A41E1B77E60C00EBC5E5 /* newStl.png */,
-				6C97BDA61B736668001E3E62 /* HW_41_44_CoreData.xcdatamodeld */,
-				6C97BDD11B7378C6001E3E62 /* ASDataManager.h */,
-				6C97BDD21B7378C6001E3E62 /* ASDataManager.m */,
 				6C97BDA31B736668001E3E62 /* AppDelegate.h */,
 				6C97BDA41B736668001E3E62 /* AppDelegate.m */,
+				6C97BDAC1B736668001E3E62 /* Main.storyboard */,
+				6C97BDD11B7378C6001E3E62 /* ASDataManager.h */,
+				6C97BDD21B7378C6001E3E62 /* ASDataManager.m */,
+				6C57A41A1B77BD1500EBC5E5 /* Course ViewController */,
+				6CA2B8D01B750E5300FF93AB /* Students ViewController */,
+				6C57A4381B77EF5000EBC5E5 /* Teacher ViewController */,
+				6C57A43C1B77F15500EBC5E5 /* Detail ViewController */,
+				6C97BDAF1B736668001E3E62 /* Images.xcassets */,
+				6C97BDA61B736668001E3E62 /* HW_41_44_CoreData.xcdatamodeld */,
+				6CA2B8D11B750E6100FF93AB /* Edit Students ViewController */,
 				6C97BD9F1B736668001E3E62 /* Supporting Files */,
 			);
 			path = "HW_41-44_CoreData";
@@ -172,6 +203,8 @@
 		6C97BD9F1B736668001E3E62 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6C2DDA471B76AF2600AD2F8D /* TabViewController.h */,
+				6C2DDA481B76AF2600AD2F8D /* TabViewController.m */,
 				6C97BDB11B736668001E3E62 /* LaunchScreen.xib */,
 				6C97BDA01B736668001E3E62 /* Info.plist */,
 				6C97BDA11B736668001E3E62 /* main.m */,
@@ -315,7 +348,6 @@
 			files = (
 				6C97BDAE1B736668001E3E62 /* Main.storyboard in Resources */,
 				6C97BDB31B736668001E3E62 /* LaunchScreen.xib in Resources */,
-				6C57A41F1B77E60C00EBC5E5 /* newStl.png in Resources */,
 				6C97BDB01B736668001E3E62 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -334,6 +366,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6CCBD1541B78AE3B000BB391 /* ASDetailTableViewCell.m in Sources */,
 				6C2DDA491B76AF2600AD2F8D /* TabViewController.m in Sources */,
 				6C97BDA51B736668001E3E62 /* AppDelegate.m in Sources */,
 				6CA2B8CB1B74C2A100FF93AB /* ASStudentsViewController.m in Sources */,
@@ -343,6 +376,9 @@
 				6C97BDA81B736668001E3E62 /* HW_41_44_CoreData.xcdatamodeld in Sources */,
 				6CA2B8CF1B74C32D00FF93AB /* ASStudents.m in Sources */,
 				6C97BDA21B736668001E3E62 /* main.m in Sources */,
+				6CCBD1511B78AC4B000BB391 /* ASDetailViewController.m in Sources */,
+				6C57A43B1B77EF7600EBC5E5 /* ASTeacherViewController.m in Sources */,
+				6CCBD1571B78FF1B000BB391 /* UIView+SuperTableViewCell.m in Sources */,
 				6C97BDD01B73783A001E3E62 /* ASCoreDataViewController.m in Sources */,
 				6C2DDA431B76AE1B00AD2F8D /* ASTeacher.m in Sources */,
 				6C57A41D1B77BD4200EBC5E5 /* ASCourseViewController.m in Sources */,
@@ -474,6 +510,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "HW_41-44_CoreData/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -484,6 +521,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "HW_41-44_CoreData/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

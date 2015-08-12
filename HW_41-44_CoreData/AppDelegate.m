@@ -8,16 +8,19 @@
 
 #import "AppDelegate.h"
 #import "TabViewController.h"
+
 #import "ASStudentsViewController.h"
 #import "ASCourseViewController.h"
+#import "ASTeacherViewController.h"
+
 @interface AppDelegate ()
 
 @property (nonatomic, strong) TabViewController* tabController;
 
 @property (nonatomic, strong) ASStudentsViewController* vc1;
-@property (nonatomic, strong) ASCourseViewController* vc2;
-//@property (nonatomic, strong) ViewController* vc2;
-//@property (nonatomic, strong) ViewController* vc3;
+@property (nonatomic, strong) ASCourseViewController*   vc2;
+@property (nonatomic, strong) ASTeacherViewController*  vc3;
+
 
 @end
 
@@ -27,17 +30,19 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
 
-    
-    ASStudentsViewController *view1  = [[ASStudentsViewController alloc] init];
-    ASCourseViewController   *view2  = [[ASCourseViewController alloc] init];
+    ASStudentsViewController  *view1  = [[ASStudentsViewController alloc] init];
+    ASCourseViewController    *view2  = [[ASCourseViewController alloc] init];
+    ASTeacherViewController   *view3  = [[ASTeacherViewController alloc] init];
 
     UINavigationController *navVC1 = [[UINavigationController alloc] initWithRootViewController:view1];
     UINavigationController *navVC2 = [[UINavigationController alloc] initWithRootViewController:view2];
+    UINavigationController *navVC3 = [[UINavigationController alloc] initWithRootViewController:view3];
 
     self.vc1 = view1;
     self.vc2 = view2;
+    self.vc3 = view3;
 
-    NSArray *tabItems = @[navVC1,navVC2];
+    NSArray *tabItems = @[navVC1,navVC2,navVC3];
 
     
     navVC1.tabBarItem =
@@ -48,8 +53,12 @@
     navVC2.tabBarItem =
     [[UITabBarItem alloc] initWithTitle:@"Courses"
                                   image:[UIImage imageNamed:@"aami3-35-128"]
-                                    tag:1];
+                                    tag:2];
 
+    navVC3.tabBarItem =
+    [[UITabBarItem alloc] initWithTitle:@"Teacher"
+                                  image:[UIImage imageNamed:@"2163_-_Teaching-128"]
+                                    tag:3];
     
     TabViewController *tbc = [[TabViewController alloc] init];
     [tbc setViewControllers:tabItems];
@@ -61,10 +70,7 @@
     [self.window makeKeyAndVisible];
 
    
-    
-    
-    
-    
+
     return YES;
 }
 

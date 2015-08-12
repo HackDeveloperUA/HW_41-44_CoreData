@@ -1,28 +1,27 @@
 //
-//  ASCourseViewController.m
+//  ASTeacherViewController.m
 //  HW_41-44_CoreData
 //
 //  Created by MD on 09.08.15.
 //  Copyright (c) 2015 MD. All rights reserved.
 //
-#import "ASDetailViewController.h"
-#import "ASCourseViewController.h"
-#import "ASCourse.h"
 
-@interface ASCourseViewController ()
+#import "ASTeacherViewController.h"
+#import "ASDetailViewController.h"
+#import "ASTeacher.h"
+
+@interface ASTeacherViewController ()
 
 @end
 
-@implementation ASCourseViewController
+@implementation ASTeacherViewController
 @synthesize fetchedResultsController = _fetchedResultsController;
+
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"ASCourse";
-    
-
-    
+    self.navigationItem.title = @"ASTeacher";
 }
 
 - (void)didReceiveMemoryWarning {
@@ -32,50 +31,26 @@
 
 -(void) deleteEntityAction:(id) sender {
     
-    NSLog(@"deleteEntityAction - ASCourse View Controller");
+    NSLog(@"deleteEntityAction - ASTeacher View Controller");
     //[self deleteAllObjects];
 }
 
 
 -(void) addEntityAction:(id) sender {
     
-    NSLog(@"addEntityAction - ASCourse View Controller");
-   /* UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    ASEditStudentsViewController *vc = (ASEditStudentsViewController *)[storyboard  instantiateViewControllerWithIdentifier:@"ASEditStudentsViewController"];
-    
-    [self.navigationController pushViewController:vc animated:YES];
-    */
-    
-    /*
-    ASDetailViewController* detailVC = [[ASDetailViewController alloc] initWithStyle:UITableViewStylePlain];
+    NSLog(@"addEntityAction - ASTeacher View Controller");
 
-    detailVC.className    =  [ASCourse class];
-    detailVC.objectEntity =  nil;
-    
-    [self.navigationController pushViewController:detailVC animated:YES];
-    */
-    
-    /*
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     ASDetailViewController *detailVC = (ASDetailViewController *)[storyboard  instantiateViewControllerWithIdentifier:@"ASDetailViewController"];
     
     detailVC.className    =  [ASTeacher class];
-    detailVC.objectEntity =  nil;
+    //detailVC.objectEntity =  nil;
     
     [self.navigationController pushViewController:detailVC animated:YES];
-    */
-    
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    ASDetailViewController *detailVC = (ASDetailViewController *)[storyboard  instantiateViewControllerWithIdentifier:@"ASDetailViewController"];
-    
-    
-    detailVC.className    =  [ASCourse class];
-    detailVC.objectEntity =  nil;
-    
-    [self.navigationController pushViewController:detailVC animated:YES];
-    
+    //////
     
 }
+
 
 
 
@@ -88,17 +63,19 @@
     NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
     
     NSEntityDescription* description =
-    [NSEntityDescription entityForName:@"ASCourse"
+    [NSEntityDescription entityForName:@"ASTeacher"
                 inManagedObjectContext:self.managedObjectContext];
     
     [fetchRequest setEntity:description];
     
-    NSSortDescriptor* nameDescription =
-    [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+    NSSortDescriptor* firstNameDescription =
+    [[NSSortDescriptor alloc] initWithKey:@"firstName" ascending:YES];
     
-
+    NSSortDescriptor* lastNameDescription =
+    [[NSSortDescriptor alloc] initWithKey:@"lastName" ascending:YES];
     
-    [fetchRequest setSortDescriptors:@[nameDescription]];
+    
+    [fetchRequest setSortDescriptors:@[firstNameDescription,lastNameDescription]];
     
     
     NSFetchedResultsController *aFetchedResultsController =
@@ -123,10 +100,10 @@
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     
-    ASCourse *course = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    ASTeacher *teacher = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ %@",course.name,course.subject];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"Count student %@",[course valueForKeyPath:@"students.@count"]];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@ %@",teacher.firstName, teacher.lastName];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"Count courses %@",[teacher valueForKeyPath:@"courses.@count"]];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 }
 
@@ -134,17 +111,29 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
+    
+/*
+    ASTeacher *teacher = [self.fetchedResultsController objectAtIndexPath:indexPath];
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    ASCourse *course = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    ASDetailViewController *detailVC = (ASDetailViewController *)[storyboard  instantiateViewControllerWithIdentifier:@"ASDetailViewController"];
+
+    detailVC.className    =  [ASTeacher class];
+    detailVC.objectEntity =  teacher;
+    
+    [self.navigationController pushViewController:detailVC animated:YES];*/
+    
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    ASTeacher    *teacher = [self.fetchedResultsController objectAtIndexPath:indexPath];
     ASDetailViewController *detailVC = (ASDetailViewController *)[storyboard  instantiateViewControllerWithIdentifier:@"ASDetailViewController"];
     
     
-    detailVC.className    =  [ASCourse class];
-    detailVC.objectEntity =  course;
+    detailVC.className    =  [ASTeacher class];
+    detailVC.objectEntity =  teacher;
     
     [self.navigationController pushViewController:detailVC animated:YES];
+    
+    
 }
-
 
 @end
