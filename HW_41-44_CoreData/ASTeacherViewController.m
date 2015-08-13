@@ -32,22 +32,20 @@
 -(void) deleteEntityAction:(id) sender {
     
     NSLog(@"deleteEntityAction - ASTeacher View Controller");
-    //[self deleteAllObjects];
+    [[ASDataManager sharedManager] deleteAllObjects:@"ASTeacher"];
 }
 
 
 -(void) addEntityAction:(id) sender {
     
-    NSLog(@"addEntityAction - ASTeacher View Controller");
-
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     ASDetailViewController *detailVC = (ASDetailViewController *)[storyboard  instantiateViewControllerWithIdentifier:@"ASDetailViewController"];
     
+    
     detailVC.className    =  [ASTeacher class];
-    //detailVC.objectEntity =  nil;
+    detailVC.objectEntity =  nil;
     
     [self.navigationController pushViewController:detailVC animated:YES];
-    //////
     
 }
 
@@ -112,27 +110,26 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-/*
-    ASTeacher *teacher = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    ASDetailViewController *detailVC = (ASDetailViewController *)[storyboard  instantiateViewControllerWithIdentifier:@"ASDetailViewController"];
 
-    detailVC.className    =  [ASTeacher class];
-    detailVC.objectEntity =  teacher;
-    
-    [self.navigationController pushViewController:detailVC animated:YES];*/
+    ASTeacher *teacher = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    ASTeacher    *teacher = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    
     ASDetailViewController *detailVC = (ASDetailViewController *)[storyboard  instantiateViewControllerWithIdentifier:@"ASDetailViewController"];
     
-    
     detailVC.className    =  [ASTeacher class];
-    detailVC.objectEntity =  teacher;
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"ASTeacher" inManagedObjectContext:[[ASDataManager sharedManager] managedObjectContext]];
+    
+    detailVC.objectEntity = teacher;
+    detailVC.teacher      = teacher;
+    detailVC.navigationItem.title = @"Edit Teacher";
+
+    
+    NSLog (@"student %@",teacher);
     
     [self.navigationController pushViewController:detailVC animated:YES];
-    
     
 }
 

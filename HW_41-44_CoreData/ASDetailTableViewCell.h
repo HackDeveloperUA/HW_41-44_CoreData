@@ -16,5 +16,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *label;
 @property (strong, nonatomic) IBOutlet UITextField *textField;
 
+- (IBAction)textFieldValueChanged:(id)sender;
 
 @end

@@ -27,9 +27,18 @@
 
 
 @property (assign, nonatomic) BOOL isSave;
+@property (assign, nonatomic) BOOL isEdit;
 
 @property (strong, nonatomic) ASCourse* course;
 @property (strong, nonatomic) ASTeacher* teacher;
 @property (strong, nonatomic) ASStudents* student;
+
+
+@property (strong, nonatomic) NSArray* students;
+@property (strong, nonatomic) NSArray* teachers;
+@property (strong, nonatomic) NSArray* courses;
+
+@property (strong, nonatomic)  UIActivityIndicatorView* indicator;
+
 
 @end

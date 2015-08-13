@@ -32,65 +32,20 @@
                                                                                 target:self
                                                                                 action:@selector(doneButtonAction:)];
     
-    
-    //self.navigationItem.title = (NSString*)self.className;
-    self.navigationItem.rightBarButtonItem = doneButton;
-    /*
-    if (!self.objectEntity) {
-        
-        if ([self.className isSubclassOfClass:[ASCourse class]]) {
-            
-            ASCourse* course = [NSEntityDescription insertNewObjectForEntityForName:@"ASCourse" inManagedObjectContext:
-                                [[ASDataManager sharedManager] managedObjectContext]];
-            self.objectEntity = course;
-            
-        }
-        
-        if ([self.className isSubclassOfClass:[ASTeacher class]]) {
-            
-            ASTeacher* teacher = [NSEntityDescription insertNewObjectForEntityForName:@"ASTeacher"  inManagedObjectContext:
-                                  [[ASDataManager sharedManager] managedObjectContext]];
-            
-            self.objectEntity = teacher;
-            
-        }
-        
-        if ([self.className isSubclassOfClass:[ASStudents class]]) {
-            
-            ASStudents* student = [NSEntityDescription insertNewObjectForEntityForName:@"ASStudents" inManagedObjectContext:
-                                   [[ASDataManager sharedManager] managedObjectContext]];
-            self.objectEntity = student;
-        }
-    }*/
-    
-    /*
-    if (!self.objectEntity) {
-        
-        if ([self.className isSubclassOfClass:[ASCourse class]]) {
-            
-            ASCourse* course = [NSEntityDescription entityForName:@"ASCourse" inManagedObjectContext:[[ASDataManager sharedManager] managedObjectContext]];
-            self.objectEntity = course;
-            
-        }
-        
-        if ([self.className isSubclassOfClass:[ASTeacher class]]) {
-            
-            ASTeacher* teacher = [NSEntityDescription insertNewObjectForEntityForName:@"ASTeacher"  inManagedObjectContext:
-                                  [[ASDataManager sharedManager] managedObjectContext]];
-            
-            self.objectEntity = teacher;
-            
-        }
-        
-        if ([self.className isSubclassOfClass:[ASStudents class]]) {
-            
-            ASStudents* student = [NSEntityDescription insertNewObjectForEntityForName:@"ASStudents" inManagedObjectContext:
-                                   [[ASDataManager sharedManager] managedObjectContext]];
-            self.objectEntity = student;
-        }
-    }*/
-    
-    
+    UIBarButtonItem *refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
+                                                                                target:self
+                                                                                action:@selector(refreshButtonAction:)];
+
+    self.students = [self studentsRequest];
+    self.teachers = [self teachersRequest];
+    self.courses  = [self coursesRequest];
+
+    NSLog(@"[self.courses count] = %d",[self.courses count]);
+    NSLog(@"[self.teachers count] = %d",[self.teachers count]);
+    NSLog(@"[self.students count] = %d",[self.students count]);
+
+    self.navigationItem.rightBarButtonItems = @[refreshButton,doneButton];
+
     
     if (!self.objectEntity) {
         
@@ -98,12 +53,16 @@
 
             self.course = [NSEntityDescription insertNewObjectForEntityForName:@"ASCourse"  inManagedObjectContext:
                           [[ASDataManager sharedManager] managedObjectContext]];
+            self.navigationItem.title = @"Create Course";
+
         }
         
         if ([self.className isSubclassOfClass:[ASTeacher class]]) {
            
             self.teacher = [NSEntityDescription insertNewObjectForEntityForName:@"ASTeacher"  inManagedObjectContext:
                            [[ASDataManager sharedManager] managedObjectContext]];
+            self.navigationItem.title = @"Create Teacher";
+
             
         }
         
@@ -111,9 +70,30 @@
             
             self.student = [NSEntityDescription insertNewObjectForEntityForName:@"ASStudents"  inManagedObjectContext:
                             [[ASDataManager sharedManager] managedObjectContext]];
+            self.navigationItem.title = @"Create Student";
+
         }
+       
+        self.isEdit = NO;
+        
+    } else {
+        self.isEdit = YES;
     }
     
+    self.isSave = NO;
+    
+ 
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(textFieldDidChageNotification:)
+                                                 name:UITextFieldTextDidChangeNotification
+                                               object:nil];
+    
+
+}
+
+-(void) dealloc {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -123,24 +103,76 @@
 
 #pragma mark - Action
 
-/*
+
 -(void)viewWillDisappear:(BOOL)animated {
-    if (!self.isAddedSuccessfully && self.allowInteraction) {
-        [[[DataManager sharedManager] managedObjectContext] deleteObject:self.object];
-        [[[DataManager sharedManager] managedObjectContext] save:nil];
+    
+    if (self.isSave == NO && self.isEdit == NO) {
+       
+        if ([self.className isSubclassOfClass:[ASCourse class]]) {
+           [[[ASDataManager sharedManager] managedObjectContext] deleteObject:self.course];
+        }
+        
+        
+        if ([self.className isSubclassOfClass:[ASTeacher class]]) {
+             [[[ASDataManager sharedManager] managedObjectContext] deleteObject:self.teacher];
+        }
+        
+        
+        if ([self.className isSubclassOfClass:[ASStudents class]]) {
+           [[[ASDataManager sharedManager] managedObjectContext] deleteObject:self.student];
+        }
+        
+       [[[ASDataManager sharedManager] managedObjectContext] save:nil];
     }
-    [self.navigationController popViewControllerAnimated:YES];
-    self.object = nil;
-    self.className = nil;
-}*/
+
+}
+
+-(void) refreshButtonAction:(id)sender {
+
+    
+    UIActivityIndicatorView *indicatorView = [[UIActivityIndicatorView alloc]
+                                              initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    
+    indicatorView.center = self.view.center;
+    self.indicator       = indicatorView;
+    [self.view addSubview:self.indicator ];
+
+    NSMutableIndexSet *indexSet = [NSMutableIndexSet indexSet];
+
+    
+    if ([self.className isSubclassOfClass:[ASCourse class]])
+    {   [indexSet addIndex:1];  [indexSet addIndex:2]; }
+    
+
+    if ([self.className isSubclassOfClass:[ASTeacher class]])
+      { [indexSet addIndex:1];}
+    
+
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self.indicator startAnimating];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+          
+            self.students = [self studentsRequest];
+            self.teachers = [self teachersRequest];
+            self.courses  = [self coursesRequest];
+            
+            [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationFade];
+            [self.indicator stopAnimating];
+            
+        });
+    });
+}
 
 
 -(void) doneButtonAction:(id)sender {
     
-   // ASStudents* student = (ASStudents*)self.objectEntity;
-   // [[[ASDataManager sharedManager] managedObjectContext] deleteObject:student];
+    self.isSave = YES;
+    NSLog(@"doneButtonAction");
+
     
     NSError* error = nil;
+    
     if (![[[ASDataManager sharedManager] managedObjectContext] save:&error]) {
         NSLog(@"%@",[error localizedDescription]);
     }
@@ -152,60 +184,92 @@
 #pragma mark - TextFieldDelegate
 
 
+-(void)textFieldDidChageNotification:(NSNotification*) notification {
+    UITextField* textField = notification.object;
+    [self textFieldShouldEndEditing:textField];
+}
 
--(void)textFieldDidEndEditing:(UITextField *)textField {
-    //self.tableView.scrollEnabled = YES;
+
+
+-(void)textFieldShouldEndEditing:(UITextField *)textField {
     
     ASDetailTableViewCell* cell = (ASDetailTableViewCell*)[textField superTableViewCell];
     
-    
-    if ([self.objectEntity isKindOfClass:[ASCourse class]]) {
+    if ([self.className isSubclassOfClass:[ASCourse class]]) {
         
         if ([cell.label.text isEqualToString:@"Name Course"])
-        { [(ASCourse*)self.objectEntity setName:textField.text];}
+        {   [self.course setName:textField.text];}
     
         if ([cell.label.text isEqualToString:@"Subject"])
-        { [(ASCourse*)self.objectEntity setSubject:textField.text]; }
+        {   [self.course setSubject:textField.text]; }
         
         if ([cell.label.text isEqualToString:@"Branch"])
-        { [(ASCourse*)self.objectEntity setBranch:textField.text]; }
+        {   [self.course setBranch:textField.text]; }
     }
     
     
     
-    
-    if ([self.objectEntity isKindOfClass:[ASTeacher class]]) {
+    if ([self.className isSubclassOfClass:[ASTeacher class]]) {
         
-        if ([cell.label.text isEqualToString:@"First Name"]) {
-            [(ASTeacher*)self.objectEntity setFirstName:textField.text];
-        }
+        if ([cell.label.text isEqualToString:@"First Name"])
+        { [self.teacher setFirstName:textField.text]; }
         
-        if ([cell.label.text isEqualToString:@"Last Name"]) {
-            [(ASTeacher*)self.objectEntity setLastName:textField.text];
-        }
+        if ([cell.label.text isEqualToString:@"Last Name"])
+        {  [self.teacher setLastName:textField.text]; }
+        
      }
     
     
     
-    if ([self.objectEntity isKindOfClass:[ASStudents class]]) {
+    if ([self.className isSubclassOfClass:[ASStudents class]]) {
         
-        if ([cell.label.text isEqualToString:@"First Name"]) {
-            [(ASStudents*)self.objectEntity setFirstName:textField.text];
-        }
+        if ([cell.label.text isEqualToString:@"First Name"])
+        {  [self.student setFirstName:textField.text]; }
         
-        if ([cell.label.text isEqualToString:@"Last Name"]) {
-            [(ASStudents*)self.objectEntity setLastName:textField.text];
-        }
+        if ([cell.label.text isEqualToString:@"Last Name"])
+        {  [self.student setLastName:textField.text]; }
         
-        if ([cell.label.text isEqualToString:@"Email"]) {
-            [(ASStudents*)self.objectEntity setEmail:textField.text];
-        }
+        
+        if ([cell.label.text isEqualToString:@"Email"])
+        { [self.student setEmail:textField.text];  }
     }
 
+    
 }
 
 
-#pragma mark - Table view data source
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+
+
+        if ([self.className isSubclassOfClass:[ASCourse class]]) {
+            
+            switch (indexPath.section) {
+                case 1:  return 35; break;
+                case 2:  return 35; break;
+               default: return 55;  break;
+
+            }
+        }
+
+        if ([self.className isSubclassOfClass:[ASTeacher class]]) {
+
+            switch (indexPath.section) {
+                case 2:  return 35; break;
+                default: return 55;  break;
+            }
+        }
+
+    
+    if ([self.className isSubclassOfClass:[ASStudents class]]) {
+        
+        return 55;
+    }
+
+  return 1;
+
+}
+
+#pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 
@@ -218,7 +282,8 @@
     }
     
     if ([self.className isSubclassOfClass:[ASStudents class]]) {
-        return 2;
+       //return 2;
+        return 3;
     }
  
     return 1;
@@ -228,23 +293,24 @@
 
     if ([self.className isSubclassOfClass:[ASCourse class]]) {
         
-        ASCourse* course = (ASCourse*)self.objectEntity;
+        //ASCourse* course = (ASCourse*)self.objectEntity;
 
         switch (section) {
             case 0:  return 3;  break;
-            case 1:  [course valueForKeyPath:@"teachers.@count"]; break;
-            case 2:  [course valueForKeyPath:@"students.@count"]; break;
-            default: return 1;  break;
+            case 1:  return [self.teachers count]; break;
+            case 2:  return [self.students count]; break;
+            //default: return 1;  break;
         }
     }
     
+    
     if ([self.className isSubclassOfClass:[ASTeacher class]]) {
       
-     ASTeacher* teacher = (ASTeacher*)self.objectEntity;
+    // ASTeacher* teacher = (ASTeacher*)self.objectEntity;
    
         switch (section) {
             case 0:  return 2;  break;
-            case 1:  [teacher valueForKeyPath:@"courses.@count"];  break;
+            case 1:  return [self.courses count];   break;
            // default: return 1;  break;
         }
     }
@@ -255,7 +321,8 @@
         switch (section) {
               case 0:  return 2;  break;
               case 1:  return 1;  break;
-              //default: return 1;  break;
+              case 2:  return [self.courses count]; break;
+                //default: return 1;  break;
             }
       }
  
@@ -286,6 +353,8 @@
         switch (section) {
             case 0: return @"Initials";  break;
             case 1: return @"Other";     break;
+            case 2: return @"Courses";   break;
+
             //default:break;
         }
     }
@@ -304,43 +373,66 @@
                 
                 if (indexPath.section == 0) {
                 
-                    ASCourse* course = (ASCourse*)self.objectEntity;
                     ASDetailTableViewCell *cell = (ASDetailTableViewCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
                     if (cell == nil)
                     { cell = [[ASDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier]; }
                 
                     switch (indexPath.row) {
                             
-                        case 0:  cell.label.text = @"Name Course"; cell.textField.text = course.name;    break;
-                        case 1:  cell.label.text = @"Subject";     cell.textField.text = course.subject; break;
-                        case 2:  cell.label.text = @"Branch";      cell.textField.text = course.branch;  break;
+                        case 0:  cell.label.text = @"Name Course"; cell.textField.text = self.course.name;    break;
+                        case 1:  cell.label.text = @"Subject";     cell.textField.text = self.course.subject; break;
+                        case 2:  cell.label.text = @"Branch";      cell.textField.text = self.course.branch;  break;
 
                         default: NSLog(@"Не нашел cell");  break;
                     }
                  return cell;
-                                          }
+              }
         
         
         
                   if (indexPath.section == 1) {
 
-                    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+                    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"teacherCell"];
                     if (cell == nil)
-                    { cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"]; }
-                    cell.textLabel.text = @"tmp1";
-                    return cell;
+                    { cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"teacherCell"]; }
+                     
+                      NSString* fullName = [NSString stringWithFormat:@"%@ %@",[[self.teachers objectAtIndex:indexPath.row] firstName],
+                                                                                [[self.teachers objectAtIndex:indexPath.row] lastName]];
+                     
+                      NSLog(@"indexPath.section = %d  indexPath.row = %d",indexPath.section,indexPath.row);
+                      cell.textLabel.text = fullName;
+
+                         if ([self.course.teachers containsObject:[self.teachers objectAtIndex:indexPath.row]]){
+                                cell.accessoryType = UITableViewCellAccessoryCheckmark;
+                             } else {
+                                cell.accessoryType = UITableViewCellAccessoryNone;
+                             }
+                 
+                      return cell;
                     }
         
         
                    if (indexPath.section == 2) {
             
-                    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+                    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"studentCell"];
                     if (cell == nil)
-                    { cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"]; }
-                    cell.textLabel.text = @"tmp2";
+                    { cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"studentCell"]; }
+
+                       NSString* fullName = [NSString stringWithFormat:@"%@ %@",[[self.students objectAtIndex:indexPath.row] firstName],
+                                                                                 [[self.students objectAtIndex:indexPath.row] lastName]];
+                       
+                       cell.textLabel.text = fullName;
+                       
+                       
+                       if ([self.course.students containsObject:[self.students objectAtIndex:indexPath.row]]){
+                           cell.accessoryType = UITableViewCellAccessoryCheckmark;
+                       } else {
+                           cell.accessoryType = UITableViewCellAccessoryNone;
+                       }
+                       
                     return cell;
                     }
-    }
+      }
     
     
     
@@ -350,8 +442,10 @@
 
         static NSString* identifier = @"detailCell";
         
-        ASTeacher* teacher = (ASTeacher*)self.objectEntity;
+        //ASTeacher* teacher = (ASTeacher*)self.objectEntity;
+        
         ASDetailTableViewCell *cell = (ASDetailTableViewCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
+       
         if (cell == nil)
         { cell = [[ASDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier]; }
         
@@ -359,22 +453,30 @@
             
             switch (indexPath.row) {
                     
-                case 0:  cell.label.text = @"First Name";  cell.textField.text = teacher.firstName; break;
-                case 1:  cell.label.text = @"Last Name";   cell.textField.text = teacher.lastName; break;
+                case 0:  cell.label.text = @"First Name";  cell.textField.text = self.teacher.firstName; break;
+                case 1:  cell.label.text = @"Last Name";   cell.textField.text = self.teacher.lastName; break;
 
                 default: NSLog(@"Не нашел cell");  break;
             }
         } else {
             
-            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"courseCell"];
             
             if (cell == nil) {
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"courseCell"];
             }
-            cell.textLabel.text = @"tmp";
+
+            NSLog(@"indexPath.section = %d  indexPath.row = %d",indexPath.section,indexPath.row);
+
+            cell.textLabel.text = [[self.courses objectAtIndex:indexPath.row] name];
+            
+            if ([self.teacher.courses containsObject:[self.courses objectAtIndex:indexPath.row]]){
+                cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            } else {
+                cell.accessoryType = UITableViewCellAccessoryNone;
+            }
+            
             return cell;
-            
-            
         }
         return cell;
     }
@@ -387,26 +489,57 @@
     
         static NSString* identifier = @"detailCell";
         
-        ASStudents* student = (ASStudents*)self.objectEntity;
-        ASDetailTableViewCell *cell = (ASDetailTableViewCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
-        if (cell == nil)
-        { cell = [[ASDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier]; }
-    
-        cell.label.text = @"fsdf";
+
+
         if (indexPath.section == 0) {
 
+            ASDetailTableViewCell *cell = (ASDetailTableViewCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
+            if (cell == nil)
+            { cell = [[ASDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier]; }
+            
+            
             switch (indexPath.row) {
                     
-                case 0:  cell.label.text = @"First Name"; cell.textField.text = student.firstName; break;
-                case 1:  cell.label.text = @"Last Name";  cell.textField.text = student.lastName;  break;
+                case 0:  cell.label.text = @"First Name"; cell.textField.text = self.student.firstName; break;
+                case 1:  cell.label.text = @"Last Name";  cell.textField.text = self.student.lastName;  break;
                     
                 default: NSLog(@"Не нашел cell");  break;
             }
-        } else {
-           cell.label.text = @"Email"; cell.textField.text = student.email;
+            return cell;
         }
+    
+    
+        if (indexPath.section == 1) {
+            
+            ASDetailTableViewCell *cell = (ASDetailTableViewCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
+            if (cell == nil)
+            { cell = [[ASDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier]; }
+            
+            
+            cell.label.text = @"Email"; cell.textField.text = self.student.email;
+            return  cell;
+         }
         
-      return cell;
+        if (indexPath.section == 2) {
+
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"studentCell"];
+            
+            if (cell == nil) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"studentCell"];
+            }
+            
+            
+            cell.textLabel.text = [[self.courses objectAtIndex:indexPath.row] name];
+            
+            if ([self.student.courses containsObject:[self.courses objectAtIndex:indexPath.row]]){
+                cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            } else {
+                cell.accessoryType = UITableViewCellAccessoryNone;
+            }
+            
+            return cell;
+          
+          }
     }
     
     
@@ -415,51 +548,126 @@
 
 
 
+#pragma mark - Requests
 
-
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+-(NSArray*)studentsRequest {
+    
+    NSFetchRequest* request = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription* description = [NSEntityDescription entityForName:@"ASStudents"
+                                                   inManagedObjectContext:[[ASDataManager sharedManager] managedObjectContext]];
+    
+    [request setEntity:description];
+    
+    NSSortDescriptor* firstNameDescriptor = [[NSSortDescriptor alloc] initWithKey:@"firstName" ascending:YES];
+    NSSortDescriptor* lastNameDescriptor = [[NSSortDescriptor alloc] initWithKey:@"lastName" ascending:YES];
+    
+    [request setSortDescriptors:@[firstNameDescriptor, lastNameDescriptor]];
+    
+    return [[[ASDataManager sharedManager] managedObjectContext]
+            executeFetchRequest:request
+            error:nil];
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+-(NSArray*)teachersRequest {
+    
+    NSFetchRequest* request = [[NSFetchRequest alloc] init];
+    NSEntityDescription* description = [NSEntityDescription entityForName:@"ASTeacher" inManagedObjectContext:[[ASDataManager sharedManager] managedObjectContext]];
+    
+    [request setEntity:description];
+    
+    NSSortDescriptor* firstNameDescriptor = [[NSSortDescriptor alloc] initWithKey:@"firstName" ascending:YES];
+    NSSortDescriptor* lastNameDescriptor = [[NSSortDescriptor alloc] initWithKey:@"lastName" ascending:YES];
+    
+    [request setSortDescriptors:@[firstNameDescriptor, lastNameDescriptor]];
+    
+    return [[[ASDataManager sharedManager] managedObjectContext]
+            executeFetchRequest:request
+            error:nil];
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+-(NSArray*)coursesRequest {
+    
+    NSFetchRequest* request = [[NSFetchRequest alloc] init];
+    NSEntityDescription* description = [NSEntityDescription entityForName:@"ASCourse"
+                                                   inManagedObjectContext:[[ASDataManager sharedManager] managedObjectContext]];
+    
+    [request setEntity:description];
+    
+    NSSortDescriptor* nameDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+    
+    [request setSortDescriptors:@[nameDescriptor]];
+    
+    return [[[ASDataManager sharedManager] managedObjectContext]
+            executeFetchRequest:request
+            error:nil];
 }
-*/
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+ 
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    BOOL isAdded = YES;
+    
+    if (indexPath.section != 0) {
+        
+        if ([tableView cellForRowAtIndexPath:indexPath].accessoryType == UITableViewCellAccessoryNone) {
+            [[tableView cellForRowAtIndexPath:indexPath] setAccessoryType:UITableViewCellAccessoryCheckmark];
+        } else {
+            [[tableView cellForRowAtIndexPath:indexPath] setAccessoryType:UITableViewCellAccessoryNone];
+            isAdded = NO;
+        }
+        
+        if ([self.className isSubclassOfClass:[ASCourse class]]) {
+
+            if (indexPath.section == 1 && isAdded) {
+                [self.course addTeachersObject:[self.teachers objectAtIndex:indexPath.row]];
+            }
+            
+            if (indexPath.section == 1 && !isAdded) {
+                [self.course removeTeachersObject:[self.teachers objectAtIndex:indexPath.row]];
+            }
+            
+            if (indexPath.section == 2 && isAdded) {
+                [self.course addStudentsObject:[self.students objectAtIndex:indexPath.row]];
+            }
+            
+            if (indexPath.section == 2 && !isAdded) {
+                [self.course removeStudentsObject:[self.students objectAtIndex:indexPath.row]];
+            }
+            
+        }
+        
+        
+        
+        if ([self.className isSubclassOfClass:[ASTeacher class]]) {
+
+            if (indexPath.section == 1 && isAdded) {
+                [self.teacher addCoursesObject:[self.courses objectAtIndex:indexPath.row]];
+            }
+            
+            if (indexPath.section == 1 && !isAdded) {
+                [self.teacher removeCoursesObject:[self.courses objectAtIndex:indexPath.row]];
+            }
+         }
+        
+        
+        
+        if ([self.className isSubclassOfClass:[ASStudents class]]) {
+
+            if (isAdded) {
+                [self.student addCoursesObject:[self.courses objectAtIndex:indexPath.row]];
+            } else {
+                [self.student removeCoursesObject:[self.courses objectAtIndex:indexPath.row]];
+            }   
+        }
+        
+    }
+    
+    [[ASDataManager sharedManager] saveContext];
+ 
+    
 }
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

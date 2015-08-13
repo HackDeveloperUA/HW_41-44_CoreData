@@ -24,27 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"ASStudent";
-    
-   
-    //ASStudents* customStudent = [NSEntityDescription entityForName:@"ASStudents" inManagedObjectContext:[[ASDataManager sharedManager] managedObjectContext]];
-    
-    ASStudents* customStudent2 = [NSEntityDescription insertNewObjectForEntityForName:@"ASStudents" inManagedObjectContext:
-                                 [[ASDataManager sharedManager] managedObjectContext]];
-    
-    //customStudent.firstName = @"Custom Alex";
-    //customStudent.lastName  = @"Custom Skutarenko";
-    //customStudent.email     = @"Custom alexskutarenko@gmail.ua";
-    
-    //[customStudent2 setFirstName: @"Custom nil"];
-    //[customStudent setLastName:  @"Custom Skutarenko"];
-    //[customStudent setEmail:     @"alexskutarenko@gmail.ua"];
-    
-    NSError* error = nil;
-    if (![[[ASDataManager sharedManager] managedObjectContext] save:&error]) {
-        NSLog(@"%@",[error localizedDescription]);
-    }
-    
-    
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -63,14 +43,7 @@
 
 
 -(void) addEntityAction:(id) sender {
-    
-    /*
-    NSLog(@"addEntityAction - ASStudent View Controller");
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    ASEditStudentsViewController *vc = (ASEditStudentsViewController *)[storyboard  instantiateViewControllerWithIdentifier:@"ASEditStudentsViewController"];
-    [self.navigationController pushViewController:vc animated:YES];
-    */
-    
+
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     ASDetailViewController *detailVC = (ASDetailViewController *)[storyboard  instantiateViewControllerWithIdentifier:@"ASDetailViewController"];
@@ -97,6 +70,7 @@
                 inManagedObjectContext:self.managedObjectContext];
     
     [fetchRequest setEntity:description];
+    
     
     NSSortDescriptor* firstNameDescription =
     [[NSSortDescriptor alloc] initWithKey:@"firstName" ascending:YES];
@@ -133,35 +107,16 @@
     ASStudents *student = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     cell.textLabel.text = [NSString stringWithFormat:@"%@ %@",student.firstName,student.lastName];
-    cell.detailTextLabel.text = student.email;
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", student.email];
+   
+    //NSLog(@"student  === %@",student.email);
+  
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 }
 
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    /*
-    ASStudents *student = [self.fetchedResultsController objectAtIndexPath:indexPath];
-
-    
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-   
-    ASEditStudentsViewController *vc = (ASEditStudentsViewController *)[storyboard  instantiateViewControllerWithIdentifier:@"ASEditStudentsViewController"];
-    vc.student = student;
-    
-    [self.navigationController pushViewController:vc animated:YES];
-    */
-    
-    /*
-    ASStudents *student = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    ASDetailViewController* detailVC = [[ASDetailViewController alloc] initWithStyle:UITableViewStylePlain];
-    
-    detailVC.className    =  [ASStudents class];
-    detailVC.objectEntity =  student;
-    
-    [self.navigationController pushViewController:detailVC animated:YES];
-    */
     
     
     ASStudents *student = [self.fetchedResultsController objectAtIndexPath:indexPath];
@@ -172,10 +127,20 @@
     ASDetailViewController *detailVC = (ASDetailViewController *)[storyboard  instantiateViewControllerWithIdentifier:@"ASDetailViewController"];
     
     detailVC.className    =  [ASStudents class];
-    detailVC.objectEntity =  student;
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"ASStudents" inManagedObjectContext:[[ASDataManager sharedManager] managedObjectContext]];
+ 
+    detailVC.objectEntity = student;
+    detailVC.student      = student;
+    detailVC.navigationItem.title = @"Edit Student";
+
+    // detailVC.student.firstName = @"Пiшов на хуй";
+    
+    NSLog (@"student %@",student);
 
     [self.navigationController pushViewController:detailVC animated:YES];
 }
+
 
 
 @end

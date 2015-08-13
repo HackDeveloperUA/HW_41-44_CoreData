@@ -33,38 +33,13 @@
 -(void) deleteEntityAction:(id) sender {
     
     NSLog(@"deleteEntityAction - ASCourse View Controller");
-    //[self deleteAllObjects];
+    [[ASDataManager sharedManager] deleteAllObjects:@"ASCourse"];
 }
 
 
 -(void) addEntityAction:(id) sender {
     
-    NSLog(@"addEntityAction - ASCourse View Controller");
-   /* UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    ASEditStudentsViewController *vc = (ASEditStudentsViewController *)[storyboard  instantiateViewControllerWithIdentifier:@"ASEditStudentsViewController"];
-    
-    [self.navigationController pushViewController:vc animated:YES];
-    */
-    
-    /*
-    ASDetailViewController* detailVC = [[ASDetailViewController alloc] initWithStyle:UITableViewStylePlain];
 
-    detailVC.className    =  [ASCourse class];
-    detailVC.objectEntity =  nil;
-    
-    [self.navigationController pushViewController:detailVC animated:YES];
-    */
-    
-    /*
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    ASDetailViewController *detailVC = (ASDetailViewController *)[storyboard  instantiateViewControllerWithIdentifier:@"ASDetailViewController"];
-    
-    detailVC.className    =  [ASTeacher class];
-    detailVC.objectEntity =  nil;
-    
-    [self.navigationController pushViewController:detailVC animated:YES];
-    */
-    
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     ASDetailViewController *detailVC = (ASDetailViewController *)[storyboard  instantiateViewControllerWithIdentifier:@"ASDetailViewController"];
     
@@ -135,14 +110,20 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+
+    
     ASCourse *course = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     ASDetailViewController *detailVC = (ASDetailViewController *)[storyboard  instantiateViewControllerWithIdentifier:@"ASDetailViewController"];
     
-    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"ASCourse" inManagedObjectContext:[[ASDataManager sharedManager] managedObjectContext]];
+
     detailVC.className    =  [ASCourse class];
-    detailVC.objectEntity =  course;
-    
+    detailVC.objectEntity = course;
+    detailVC.course       = course;
+    detailVC.navigationItem.title = @"Edit Course";
+
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 
