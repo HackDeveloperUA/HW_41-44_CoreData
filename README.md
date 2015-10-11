@@ -46,4 +46,4 @@
 ![alt tag](https://pp.vk.me/c622222/v622222080/46638/f5RdxmvnswI.jpg)
 ![alt tag](https://pp.vk.me/c622222/v622222080/46641/8kfQ0q6QZAI.jpg)
 ![alt tag](https://pp.vk.me/c622222/v622222080/4664a/6gDlZE4Pq2U.jpg)
-![alt tag](https://pp.vk.me/c622222/v622222080/4665c/NHHVIaowm5o.jpg)
+![alt tag](https://pp.vk.me/c622222/v622222080/4665c/NHHVIaowm5o.jpg:scale: 50 %)
